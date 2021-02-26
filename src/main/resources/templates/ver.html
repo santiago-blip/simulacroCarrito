@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      >
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="multipart/form-data; charset = utf-8" />
+        <link rel="stylesheet" th:href="@{/css/fachada.css}">
+        <link rel="stylesheet" th:href="@{/css/ver.css}">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </head>
+    <body class="body">
+        <!-- <script th:if="${1 == 1}">swal("Hello world!")</script> -->
+
+        <!--NAV-->
+        <div th:replace="fragment/fragments :: nav"></div>
+        <!--NAV-->
+
+        <!--VER PRODUCTO-->
+        <div class="container-verProducto">
+            <div class="contenedorVerSecond">
+                <div class="ContimgVer">
+                    <img th:if="${producto.rutaImg != null}" th:src="@{/img/uploads/}+${producto.rutaImg}" class="imgVer">
+                    <div th:if="${producto.rutaImg == null}">
+                        <h2 style="margin-bottom: 25px;">No hay imagen para este producto</h2>
+                        <form th:action="@{/ver/imagen}" method="POST" th:object="${producto}" enctype="multipart/form-data">
+                            <input type="file" name="file">
+                            <input type="hidden" th:value="${producto.idProducto}" th:field="*{idProducto}" >
+                            <input type="submit" value="Agregar">
+                        </form>
+                    </div>
+                </div>
+                <div class="infoVer">
+                    <form enctype="multipart/form-data" method="POST" th:object="${producto}" th:action="@{/editar/producto}">
+                        <input type="hidden" th:field="*{idProducto}">
+                        <div>
+                            <input type="text" th:field="*{nombreProducto}">
+                            <label>Nombre</label>
+                        </div>
+                        <div>
+                            <input type="text" th:field="*{precioProducto}">
+                            <label>Precio</label>
+                        </div>
+                        <div>
+                            <input type="text" th:field="*{stockProducto}">
+                            <label>Stock</label>
+                        </div>
+                        <div>
+                            <input type="date" th:field="*{fechaExpedicion}">
+                            <label>fecha</label>
+                        </div>
+                        <div>
+                            <input type="file" name="file">
+                            <label>imagen</label>
+                        </div>
+                        <input type="submit" value="Enviar">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--VER PRODUCTO-->
+
+
+
+
+
+        <!--MODAL SESIÓN-->
+        <div th:replace="fragment/fragments :: modalSesion"></div>
+        <!--MODAL SESIÓN-->
+
+        <!--JQUERY-->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+        <!--SWEET ALERT-->
+        <script th:if="${success != null}">swal("Imagen agregada con éxito");</script> 
+    </body>
+</html>

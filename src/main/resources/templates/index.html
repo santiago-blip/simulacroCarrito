@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      >
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="multipart/form-data; charset = utf-8" />
+        <link rel="stylesheet" th:href="@{/css/fachada.css}">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </head>
+    <body class="body">
+        <!-- <script th:if="${1 == 1}">swal("Hello world!")</script> -->
+
+        <!--NAV-->
+        <div th:replace="fragment/fragments :: nav"></div>
+        <!--NAV-->
+
+
+        <!--PRODUCTOS ADMIN-->
+        <div class="container-productos" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="divBtnAdd">
+                <a  id="btnAddProducto">Agregar <i class="fas fa-plus-circle i"></i></a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Fecha de expedición</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${productos}">
+                        <th class="thIdtable"><a th:text="${p.idProducto}" class="idTable" th:href="@{/ver/}+${p.idProducto}"></a></th>
+                        <th th:text="${p.nombreProducto}"></th>
+                        <td th:text="${p.precioProducto}"></td>
+                        <td th:text="${p.stockProducto}"></td>
+                        <td th:text="${p.fechaExpedicion}"></td>
+                        <td th:text="${p.rutaImg}"></td>
+                        <td>
+                            <a class="btnEditarTable" th:href="@{/ver/}+${p.idProducto}">Editar</a>
+                            <input type="hidden" th:value="${p.idProducto}" class="valorIdProducto">
+                            <a class="btnEliminarTable eliminarProducto">Eliminar</a> <!--th:href="@{/eliminar(id = ${p.idProducto})}"-->
+                        </td>
+                    </tr>
+                </tbody>
+                <!--
+                
+                <nav> 
+                    <ul>
+                <!-- PRIMERA
+                <li>
+                    <span th:if="${page.ifFirst}"> Primera </span>
+                    <a th:if="${not page.ifFirst}" th:href="@{${page.url}(page=0)}">primera</a>
+                </li>
+                <!--PAGINA ANTERIOR 
+                <li>
+                    <span th:if="${not page.ifHasPrevious}"> anteriro </span>
+                    <a th:if="${page.ifHasPrevious}" th:href="@{${page.url}(page=${page.paginaActual-2})}">anterior</a>
+                </li>
+                <!--CADA UNA DE LAS PÁGINAS 
+                <li th:each="item : ${page.TotalPaginas}">
+                    <span th:if="${item.paginaActual}" th:text="${item.NumElementosPorPagina}"></span>
+                    <a th:if="${not item.paginaActual}" th:href="@{${page.url}(page=${item.NumElementosPorPagina-1})}" th:text="${item.NumElementosPorPagina}"></a>
+                </li>
+                <!-- PAGINA SIGUIENTE --
+                <li>
+                    <span th:if="${not page.ifHasNext}"> SIGUIENTE </span>
+                    <a th:if="${page.ifHasNext}" th:href="@{${page.url}(page=${page.paginaActual})}">SIGUIENTE</a>
+                </li>
+                <!-- ULTIMA --
+                <li>
+                    <span th:if="${page.ifLast}"> last </span>
+                    <a th:if="${not page.ifLast}" th:href="@{${page.url}(page=${page.totalPaginas-1})}">last</a>
+                </li>
+                </ul>
+                </nav>
+                -->
+            </table>
+        </div>
+        <div th:replace="fragment/fragments :: productos"></div>
+        <!--PRODUCTOS ADMIN-->
+
+        <!--PRODUCTOS USER-->
+        <div class="container-productos-user" > <!--sec:authorize="hasRole('!ROLE_ADMIN')"-->
+            <div class="productosUser" th:each="p : ${productos}">
+                <img th:src="@{/img/uploads/}+${p.rutaImg}" class="imgVerUser">
+                <div class="infoUsuario">
+                    <div class="divInfoUsuario">
+                        <h2 th:text="${p.nombreProducto}"></h2>
+                        <h2 th:text="${p.precioProducto}"></h2>
+                    </div>
+                    <div th:if="${p.stockProducto >0}" class="infoDivUser divInfoUsuario">
+                        <h6>Hay productos disponibles</h6>
+                        <a class="btnAñadir" th:href="@{/carrito/}+${p.idProducto}">Añadir al carrito <i class="fas fa-shopping-cart"></i></a>
+                    </div>
+                    <div th:if="${p.stockProducto <=0}" class="divInfoUsuario"><i class="fas fa-shopping-cart"></i>
+                        <h3>No disponible</h3>
+                        <input disabled value="Añadir al carrito">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--PRODUCTOS USER-->
+
+
+
+
+        <!--MODAL SESIÓN-->
+        <div th:replace="fragment/fragments :: modalSesion"></div>
+        <!--MODAL SESIÓN-->
+
+        <!--JQUERY-->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+        <!--VALIDACIÓN FORM-->
+        <script th:src="@{js/formProductos.js}"></script>
+
+        <!--ELIMINAR PRODUCTO AJAX-->
+        <script th:src="@{js/eliminarProducto.js}"></script>
+
+        
+        <!--SWEET ALERT-->
+        <script th:if="${success != null}">swal("Producto agregado con éxito");</script> 
+        <script th:if="${addProduct != null}">swal("Producto agregado con éxito al carrito");</script> 
+        <script th:if="${noProduct != null}">swal("No se puede añadir el producto porque no está disponible.");</script> 
+    </body>
+</html>

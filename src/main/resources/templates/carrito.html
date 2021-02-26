@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      >
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="multipart/form-data; charset = utf-8" />
+        <link rel="stylesheet" th:href="@{/css/fachada.css}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </head>
+    <body class="body">
+
+        <!--NAV-->
+        <div th:replace="fragment/fragments :: nav"></div>
+        <!--NAV-->
+
+
+        <!--CARRITO-->
+        <div class="container-carrito">
+            <div class="table-carrito">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="p : ${carrito.idCarritoProducto}">
+                            <th th:text="${p.idProducto.nombreProducto}"></th>
+                            <td th:text="${p.idProducto.precioProducto}"></td>
+                            <td>
+                                <input type="hidden" th:value="${p.idCarritoProducto}" class="valorIdCarrito">
+                                <input type="number" min="1" th:value="${p.cantidadProducto}" class="aumentarCarrito">
+                            </td>
+                            <td th:text="${p.totalProducto}"></td>
+                            <td>
+                                <input type="hidden" th:value="${p.idCarritoProducto}" class="valorIdCarrito">
+                                <a class="eliminarCarrito">Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="infoCarrito">
+                <h1 th:text="${carrito.totalCarrito}"></h1>
+                <input disabled value="generar pedido">
+            </div>
+        </div>
+        <!--CARRITO-->
+
+
+
+        <!--JQUERY-->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+        
+        <!--Eliminar carrito-->
+        <script th:src="@{js/carrito.js}"></script> 
+        <!--Eliminar carrito-->
+        
+        <!--SWEET ALERT-->
+        <script th:if="${success != null}">swal("Producto agregado con éxito");</script> 
+    </body>
+</html>

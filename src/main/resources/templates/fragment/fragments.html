@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      >
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div th:fragment="nav" class="container-nav">
+            <ul>
+                <li th:class="${#httpServletRequest.requestURI == '/' ? 'liActive':'li'}"><a th:href="@{/}" th:class="${#httpServletRequest.requestURI == '/' ? 'aLiActive':'aLi'}">Inicio</a></li>
+                <li sec:authotize="hasRole('ROLE_USER')" th:class="${#httpServletRequest.requestURI == '/carrito' ? 'liActive':'li'}"><a class="aLi" th:href="@{/carrito}">Carrito</a></li>
+                <li sec:authorize="!isAuthenticated()" class="li" id="modalIniciar"><a>Iniciar sesión</a></li>
+                <li sec:authorize="isAuthenticated()" class="li">
+                    <form method="post" th:action="@{/logout}">
+                        <input type="submit" class="btnCerrar" value="Cerrar Sesión">
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <!--MODAL SESIÓN-->
+        <div class="container-modal" th:fragment="modalSesion" id="contenedorSesion">
+            <div class="modalSesion"  id="modalSesion">
+                <form th:action="@{/login}" method="POST">
+                    <div>
+                        <input name="username" class="inputSesion" required>
+                        <label class="lblSesion">Usuario</label>
+                    </div>
+                    <div>
+                        <input name="password" class="inputSesion" required>
+                        <label class="lblSesion">Contraseña</label>
+                    </div>
+                    <input type="submit" value="Iniciar" class="btnEnvSesion">
+                </form>
+                <div class="divLinkRegistro">
+                    <a id="linkRegistro">Registrarse</a>
+                </div>
+            </div>
+
+
+            <div class="modalSesion" id="modalRegistro">
+                <form th:action="@{/registrarse}" method="POST">
+                    <div>
+                        <input name="username" class="inputSesion" required>
+                        <label class="lblSesion">Correo</label>
+                    </div>
+                    <div>
+                        <input name="password" class="inputSesion" required>
+                        <label class="lblSesion">Contraseña</label>
+                    </div>
+                    <input name="url" th:value="${#httpServletRequest.requestURI}" type="hidden">
+                    <input type="submit" value="Registrarse" class="btnEnvSesion">
+                </form>
+                <div class="divLinkRegistro">
+                    <a id="linkSesion">Iniciar sesión</a>
+                </div>
+            </div>
+            <script th:src="@{js/modales.js}"></script>
+        </div>
+        <!--MODAL SESIÓN-->
+        <!--MODAL ADD PRODUCTOS-->
+        <div class="containerModal-productos" th:fragment="productos" id="containerModalProducto">
+            <div class="modalProductos" id="modalProducto">
+                <form th:action="@{/producto}" method="POST" th:object="${producto}" id="formProductos">
+                    <input type="hidden" th:value="${idProducto}">
+                    <div class="divProducto">
+                        <label class="lblProducto">Nombre</label>
+                        <input type="text" th:field="*{nombreProducto}" class="inputProducto">
+                        <label id="lblnombreErr"></label>
+                    </div>
+                    <div class="divProducto">
+                        <label class="lblProducto">Precio</label>
+                        <input type="text" th:field="*{precioProducto}" class="inputProducto">
+                        <label id="lblprecioErr"></label>
+                    </div>
+                    <div class="divProducto">
+                        <label class="lblProducto">Stock</label>
+                        <input type="text" th:field="*{stockProducto}" class="inputProducto">
+                        <label id="lblstockErr"></label>
+                    </div>
+                    <div class="divProducto">
+                        <label class="lblProducto">Fecha</label>
+                        <input type="Date" th:field="*{fechaExpedicion}" id="fechaExpedicion" class="inputProducto">
+                        <label id="lblfechaErr"></label>
+                    </div>
+                    <input type="submit" value="Enviar" class="btnEnviarProducto">
+                </form>
+            </div>
+        </div>
+        <!--MODAL ADD PRODUCTOS-->
+    </body>
+</html>

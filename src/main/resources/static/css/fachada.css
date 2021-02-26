@@ -1,0 +1,238 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing:border-box;
+}
+.container-nav{
+    width: 100%;
+    height: 50px;
+    border: 1px solid #DEE2E6;
+    box-shadow: 1px 1px 5px #DEE2E6;
+    position: relative;
+}
+.container-nav ul{
+    position: absolute;
+    right: 0px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    height: 100%;
+}
+.li{
+    margin: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.aLi{
+    text-decoration: none;
+    color: black;
+}
+.li:hover .aLi{
+    color:#DEE2E6;
+}
+.aLiActive{
+    text-decoration: none;
+    color:#DEE2E6;
+}
+
+.li:after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    transition: transform .3s;
+    transform: translateX(-100%);
+}
+
+.li:hover{
+    color: #DEE2E6;
+}
+.li:hover:after{
+    transform: translateX(0%);
+    background-color: #DEE2E6;
+}
+.liActive{
+    color: #DEE2E6;
+    cursor: pointer;
+}
+.liActive:after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #DEE2E6;
+}
+.liActive:hover .aLiActive{
+    color:grey;
+}
+.liActive:hover:after{
+    background-color: grey;
+}
+
+.btnCerrar{
+    border: none;
+    background-color: white;
+}
+.li:hover .btnCerrar{
+    color:#DEE2E6;
+}
+/*MODAL SESION*/
+.container-modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 247, 247,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+.modalSesion{
+    width: 300px;
+    border: 1px solid #DEE2E6;
+    background-color: white;
+    border-radius:10px;
+    box-shadow: 1px 1px 5px #DEE2E6;
+    padding: 5px;
+    height: 230px;
+    position: absolute;
+    transform: translateY(-350%);
+    transition: transform .3s;
+}
+.modalSesion form div{
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+}
+.inputSesion{
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #DEE2E6;
+}
+.lblSesion{
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    pointer-events: none;
+    transition: transform .3s;
+}
+.inputSesion:focus ~.lblSesion,
+.inputSesion:valid ~.lblSesion
+{
+    transform: translateY(-150%);
+    font-size: 12px;
+}
+.btnEnvSesion{
+    padding: 5px;
+    display: block;
+    border: 1px solid greenyellow;
+    background-color: white;
+    color: greenyellow;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px; 
+}
+.btnEnvSesion:hover{
+    background-color: greenyellow;
+    color: white;
+}
+
+.mostrarSesion{
+    visibility: visible;
+}
+.mostrarModalSesion{
+    transition: transform .3s;
+    transform: translateY(0);
+}
+
+.divLinkRegistro{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.divLinkRegistro a{
+    margin-right: 5px;
+    cursor: pointer;
+}
+.divLinkRegistro a:hover{
+    color:greenyellow;
+}
+/*MODAL SESION*/
+
+/*MODAL PRODUCTOS*/
+.containerModal-productos{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 247, 247,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+.modalProductos{
+    width: 20%;
+    border: 1px solid #DEE2E6;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #DEE2E6;
+    transform: translateY(-300%);
+}
+.modalProductos form{
+    background-color: white;
+}
+.divProducto{
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.inputProducto{
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid #DEE2E6;
+    outline: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.btnEnviarProducto{
+    border: 1px solid greenyellow;
+    border-radius: 10px;
+    color:greenyellow;
+    background-color: white;
+    padding: 5px;
+    width: 30%;
+    display: block;
+    margin: 10px auto 10px auto;
+}
+.btnEnviarProducto:hover{
+    background-color: greenyellow;
+    color: white;
+}
+.mostrarContenedorProducto{
+    visibility: visible;
+}
+.mostrarModalProducto{
+    transform: translateY(0);
+}
+/*MODAL PRODUCTOS*/
+
+/*
+QUERIES MODALSESION
+*/
+
+/*
+QUERIES MODALSESION
+*/

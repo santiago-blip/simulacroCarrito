@@ -1,0 +1,118 @@
+.container-productos{
+    width: 100%;
+    padding: 10px;
+}
+.divBtnAdd{
+    padding: 10px;
+}
+.divBtnAdd a{
+    border: 1px solid red;
+    color: red;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.divBtnAdd a i{
+    color:red;
+
+}
+.divBtnAdd a:hover .i{
+    color: white;
+}
+#btnAddProducto{
+    color: red;
+}
+#btnAddProducto:hover{
+    background-color: red;
+    color: white;
+}
+/*TABLA*/
+.thIdtable{
+    text-align: center;
+}
+.idTable{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    text-decoration: none;
+    color:black;
+    cursor: pointer;
+}
+.idTable:hover{
+    color:white;
+    background-color: black;
+}
+.btnEditarTable{
+    padding: 5px;
+    border: 1px solid purple;
+    border-radius: 10px; 
+    color:purple;
+    text-decoration: none;
+    cursor:pointer;
+}
+.btnEditarTable:hover{
+    color:white;
+    background-color: purple;
+}
+.btnEliminarTable{
+    padding: 5px;
+    border: 1px solid red;
+    border-radius: 10px; 
+    color:red;
+    text-decoration: none;
+    cursor:pointer;
+}
+.btnEliminarTable:hover{
+    color:white;
+    background-color: red;
+}
+/*TABLA*/
+/*PRODUCTOS USER*/
+.container-productos-user{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.productosUser{
+    width: 500px;
+    height: 500px;
+    border: 1px solid #DEE2E6;
+    margin-left: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #DEE2E6;
+}
+.imgVerUser{
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+}
+.infoUsuario{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.divInfoUsuario{
+    width: 50%;
+    text-align: center;
+}
+.infoDivUser{
+    text-align: center;
+}
+
+.btnAñadir{
+    text-decoration: none;
+    color:white;
+    background-color: yellow;
+    border:1px solid yellow;
+    border-radius: 10px;
+    padding: 5px;
+    display: block;
+    width: 150px;
+    margin: 25px auto 0px auto;
+}
+/*PRODUCTOS USER*/
