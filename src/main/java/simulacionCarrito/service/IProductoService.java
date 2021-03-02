@@ -6,8 +6,8 @@
 package simulacionCarrito.service;
 
 import java.util.List;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import simulacionCarrito.entities.Productos;
 
 
@@ -15,7 +15,7 @@ public interface IProductoService {
     
     public List<Productos> listarProductos();
     
-//    public Page<Productos> findAll(Pageable page);
+    public Page<Productos> findAll(Pageable page);
     
     public Productos buscarProducto(Productos producto);
     

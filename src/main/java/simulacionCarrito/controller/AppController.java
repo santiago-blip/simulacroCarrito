@@ -58,15 +58,15 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/", "/index", "/home"}, method = RequestMethod.GET)
-    public String index(Productos producto, Model model) { //@RequestParam(name = "page", defaultValue = "0") int page, 
-//        Pageable pageRequest = PageRequest.of(page, 4); //El 4 es para indicar cuántos registros por página.
-//        Page<Productos> productos = productoService.findAll(pageRequest);
-//        
-//        Paginator<Productos> pageRender = new Paginator<>("/", productos);
-//        System.out.println("Pag actual ".concat(String.valueOf(pageRender.getPaginaActual())));
-//        model.addAttribute("productos", productos);
-//        model.addAttribute("page", pageRender);
-        model.addAttribute("productos", productoService.listarProductos());
+    public String index(@RequestParam(name = "page", defaultValue = "0") int page,Productos producto, Model model) { // 
+        Pageable pageRequest = PageRequest.of(page, 4); //El 4 es para indicar cuántos registros por página.
+        Page<Productos> productos = productoService.findAll(pageRequest);
+        
+        Paginator<Productos> pageRender = new Paginator<>("/", productos);
+        System.out.println("Pag actual ".concat(String.valueOf(pageRender.getPaginaActual())));
+        model.addAttribute("productos", productos);
+        model.addAttribute("page", pageRender);
+//        model.addAttribute("productos", productoService.listarProductos());
         model.addAttribute("producto", producto);
         return "index";
     }

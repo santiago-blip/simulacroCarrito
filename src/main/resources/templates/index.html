@@ -58,47 +58,46 @@ and open the template in the editor.
                         </td>
                     </tr>
                 </tbody>
-                <!--
-                
-                <nav> 
-                    <ul>
-                <!-- PRIMERA
-                <li>
-                    <span th:if="${page.ifFirst}"> Primera </span>
-                    <a th:if="${not page.ifFirst}" th:href="@{${page.url}(page=0)}">primera</a>
-                </li>
-                <!--PAGINA ANTERIOR 
-                <li>
-                    <span th:if="${not page.ifHasPrevious}"> anteriro </span>
-                    <a th:if="${page.ifHasPrevious}" th:href="@{${page.url}(page=${page.paginaActual-2})}">anterior</a>
-                </li>
-                <!--CADA UNA DE LAS PÁGINAS 
-                <li th:each="item : ${page.TotalPaginas}">
-                    <span th:if="${item.paginaActual}" th:text="${item.NumElementosPorPagina}"></span>
-                    <a th:if="${not item.paginaActual}" th:href="@{${page.url}(page=${item.NumElementosPorPagina-1})}" th:text="${item.NumElementosPorPagina}"></a>
-                </li>
-                <!-- PAGINA SIGUIENTE --
-                <li>
-                    <span th:if="${not page.ifHasNext}"> SIGUIENTE </span>
-                    <a th:if="${page.ifHasNext}" th:href="@{${page.url}(page=${page.paginaActual})}">SIGUIENTE</a>
-                </li>
-                <!-- ULTIMA --
-                <li>
-                    <span th:if="${page.ifLast}"> last </span>
-                    <a th:if="${not page.ifLast}" th:href="@{${page.url}(page=${page.totalPaginas-1})}">last</a>
-                </li>
-                </ul>
-                </nav>
-                -->
             </table>
+            <nav class="navPaginador"> 
+                <ul>
+                    <!-- PRIMERA -->
+                    <li>
+                        <span th:if="${page.ifFirst}"> Primera </span>
+                        <a th:if="${not page.ifFirst}" th:href="@{${page.url}(page=0)}">primera</a>
+                    </li>
+                    <!--PAGINA ANTERIOR --> 
+                    <li>
+                        <span th:if="${not page.ifHasPrevious}"> anterior </span>
+                        <a th:if="${page.ifHasPrevious}" th:href="@{${page.url}(page=${page.paginaActual-2})}">anterior</a>
+                    </li>
+                    <!--CADA UNA DE LAS PÁGINAS 
+                    <li th:each="item : ${page.TotalPaginas}">
+                        <span th:if="${item.paginaActual}" th:text="${item.NumElementosPorPagina}"></span>
+                        <a th:if="${not item.paginaActual}" th:href="@{${page.url}(page=${item.NumElementosPorPagina-1})}" th:text="${item.NumElementosPorPagina}"></a>
+                    </li>
+                    <!-- PAGINA SIGUIENTE  -->
+                    <li>
+                        <span th:if="${not page.ifHasNext}"> SIGUIENTE </span>
+                        <a th:if="${page.ifHasNext}" th:href="@{${page.url}(page=${page.paginaActual})}">SIGUIENTE</a>
+                    </li>
+                    <!-- ULTIMA  -->
+                    <li>
+                        <span th:if="${page.ifLast}"> last </span>
+                        <a th:if="${not page.ifLast}" th:href="@{${page.url}(page=${page.totalPaginas-1})}">last</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div th:replace="fragment/fragments :: productos"></div>
         <!--PRODUCTOS ADMIN-->
 
         <!--PRODUCTOS USER-->
-        <div class="container-productos-user" > <!--sec:authorize="hasRole('!ROLE_ADMIN')"-->
+        <div class="container-productos-user" sec:authorize="!isAuthenticated() || hasRole('!ROLE_ADMIN')"> <!--sec:authorize="hasRole('!ROLE_ADMIN')"-->
             <div class="productosUser" th:each="p : ${productos}">
-                <img th:src="@{/img/uploads/}+${p.rutaImg}" class="imgVerUser">
+                <div class="divDeImgVerUser">
+                    <img th:src="@{/img/uploads/}+${p.rutaImg}" class="imgVerUser">
+                </div>
                 <div class="infoUsuario">
                     <div class="divInfoUsuario">
                         <h2 th:text="${p.nombreProducto}"></h2>
@@ -136,7 +135,7 @@ and open the template in the editor.
         <!--ELIMINAR PRODUCTO AJAX-->
         <script th:src="@{js/eliminarProducto.js}"></script>
 
-        
+
         <!--SWEET ALERT-->
         <script th:if="${success != null}">swal("Producto agregado con éxito");</script> 
         <script th:if="${addProduct != null}">swal("Producto agregado con éxito al carrito");</script> 

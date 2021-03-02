@@ -40,9 +40,9 @@ public class ProductoServiceImpl implements IProductoService{
         serviceDAO.deleteById(id);
     }
 
-//    @Override
-//    public Page<Productos> findAll(Pageable page) {
-//       return serviceDAO.findAll(page);
-//    }
+    @Override
+    public Page<Productos> findAll(Pageable page) {
+       return serviceDAO.findAll(page);
+    }
     
 }
